@@ -3,6 +3,8 @@
 Reduce over collections without recomputing everything when new items arrive or
 when items in the source change.
 
+[![build status](https://secure.travis-ci.org/substack/rolling-reduce.png)](http://travis-ci.org/substack/rolling-reduce)
+
 # example
 
 ## sum

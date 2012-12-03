@@ -19,6 +19,8 @@ summer.on('result', function (sum) {
 
 summer.insert([ 7, 8, 9 ]); // 7 + 8 + 9 = 24
 
-summer.remove(1); // 24 - 7 = 17
+summer.remove('1'); // 24 - 7 = 17
 
-summer.update(2, 10); // 17 - 9 + 10 = 18
+summer.update('2', 10); // 17 - 9 + 10 = 18
+
+summer.insert('3', 11); // 18 + 11 = 29

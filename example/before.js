@@ -25,12 +25,25 @@ doc.add({
 });
 
 var result = Object.keys(doc.rows).reduce(function (acc, key) {
+    var r = doc.rows[key];
     var row = doc.rows[key].state;
+    
     if (row.type === 'output') {
         var test = acc[row.test];
         if (!test) test = acc[row.test] = {};
         if (!test.output) test.output = [];
         test.output.push(row.value);
+        var oldValue = row.value;
+        
+        r.on('delete', function () {
+            var ix = test.output.indexOf(row.value);
+            if (ix >= 0) test.output.splice(ix, 1);
+        });
+        
+        r.on('update', function () {
+            var ix = test.output.indexOf(oldValue);
+            test.output[ix] = row.value;
+        });
     }
     else if (row.type === 'test') {
         var test = acc[row.id];

@@ -28,27 +28,14 @@ RReduce.prototype.on
     return EventEmitter.prototype.on.call(this, name, f_);
 };
 
-RReduce.prototype.insert = function (key, value) {
-    var self = this;
-    if (typeof key === 'object') {
-        Object.keys(key).forEach(function (k) {
-            self.insert(k, value);
-        });
-        return;
-    }
-    
-    if (arguments.length === 1) {
-        // keys aren't required for insert()
-        value = key;
-        key = undefined;
-    }
-    self.emit('insert', self.result, value, key);
+RReduce.prototype.insert = function (value) {
+    this.emit('insert', this.result, value);
 };
 
-RReduce.prototype.update = function (key, value) {
-    this.emit('update', this.result, value, this.result[key], key);
+RReduce.prototype.update = function (prev, value) {
+    this.emit('update', this.result, prev, value);
 };
 
-RReduce.prototype.remove = function (key) {
-    this.emit('remove', this.result, this.result[key], key);
+RReduce.prototype.remove = function (value) {
+    this.emit('remove', this.result, value);
 };

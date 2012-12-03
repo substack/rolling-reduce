@@ -1,8 +1,6 @@
 var EventEmitter = require('events').EventEmitter;
 
-module.exports = function (initial) {
-    return new RReduce(initial);
-};
+module.exports = RReduce;
 
 function RReduce (initial) {
     if (!(this instanceof RReduce)) return new RReduce(initial);
